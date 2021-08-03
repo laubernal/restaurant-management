@@ -1,0 +1,24 @@
+{
+  "name": "restaurant-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/node": "^16.4.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laubernal/restaurant-management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laubernal/restaurant-management/issues"
+  },
+  "homepage": "https://github.com/laubernal/restaurant-management#readme"
+}
