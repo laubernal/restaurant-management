@@ -1,11 +1,11 @@
 export class Staff {
-  salary: number;
-  name: string;
-  occupation: string;
+  constructor(protected salary: number, private name: string, public occupation: string) {}
 
-  constructor(salary: number, name: string, occupation: string) {
-    this.salary = salary;
-    this.name = name;
-    this.occupation = occupation;
+  totalStaff(): number {
+    const totalStaff = 0;
+    return totalStaff;
   }
 }
+
+// const staff = new Staff(8, 'Adri', 'Waiter');
+// staff.totalStaff();

@@ -1,3 +1,5 @@
+// import { Staff } from '../entities/Staff';
+
 export function totalCostTemplate(): string {
   return `
         metadata {
