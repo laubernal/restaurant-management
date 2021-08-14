@@ -4,7 +4,7 @@ export function totalCostTemplate(staff: StaffCollection) {
   return {
     metadata: {
       totalStaff: staff.totalStaff(),
-      waiter: {
+      waiters: {
         total: staff.totalOccupationStaff('waiter'),
         wage: `${staff.salary('waiter')} $/h`,
       },
@@ -26,7 +26,7 @@ export function totalCostTemplate(staff: StaffCollection) {
       },
     },
     totalCost: {
-      total: 500,
+      total: staff.totalCost(),
       currency: '$',
     },
   };
