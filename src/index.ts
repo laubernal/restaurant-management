@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 
-import { totalCostTemplate } from './views/totalCost';
+import { TotalCostResponse } from './views/totalCost';
 import { employeesTemplate } from './views/employees';
 import { StaffRepository } from './repositories/staffRepository';
 import { StaffCollection } from './entities/StaffCollection';
@@ -16,7 +16,7 @@ const staffRepository = new StaffRepository('staff.json');
 app.get('/cost/total', async (req: Request, res: Response): Promise<Response> => {
   const staff = new StaffCollection([]);
 
-  return res.send(totalCostTemplate(staff));
+  return res.send(new TotalCostResponse(staff).toJson());
 });
 
 app.get('/operations/staff/', async (req: Request, res: Response): Promise<Response> => {

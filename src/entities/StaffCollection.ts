@@ -1,3 +1,4 @@
+import { STAFF_TYPES } from '../constants';
 import { Staff } from './Staff';
 
 export class StaffCollection {
@@ -30,15 +31,9 @@ export class StaffCollection {
   }
 
   public totalCost(): number {
-    const totalCostWaiters = this.totalOccupationStaff('waiter') * this.salary('waiter');
-    const totalCostCookers = this.totalOccupationStaff('cooker') * this.salary('cooker');
-    const totalCostManagers = this.totalOccupationStaff('manager') * this.salary('manager');
-    const totalCostCleanings = this.totalOccupationStaff('cleaning') * this.salary('cleaning');
-    const totalCostValets = this.totalOccupationStaff('valet') * this.salary('valet');
-
-    return (
-      totalCostWaiters + totalCostCookers + totalCostManagers + totalCostCleanings + totalCostValets
-    );
+    return STAFF_TYPES.reduce((totalCost: number, staffType: string) => {
+      return totalCost + this.totalOccupationStaff(staffType) * this.salary(staffType);
+    }, 0);
   }
 }
 
