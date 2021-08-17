@@ -1,6 +1,6 @@
 import { STAFF_TYPES } from '../constants';
 import { StaffCollection } from '../entities/StaffCollection';
-import { Metadata, StaffMetadata } from './metadata';
+import { Metadata, StaffMetadata } from './Metadata';
 
 export class TotalCostResponse {
   constructor(private staff: StaffCollection) {}
