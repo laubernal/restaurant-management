@@ -1,7 +1,7 @@
-import { totalCostTemplate } from './totalCost';
+import { TotalCostResponse } from './TotalCost';
 import { StaffCollection } from '../entities/StaffCollection';
 
 export function employeesTemplate() {
   const staff = new StaffCollection([]);
-  return totalCostTemplate(staff);
+  return new TotalCostResponse(staff);
 }

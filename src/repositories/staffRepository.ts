@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import { JsonFileReader } from './JsonFileReader';
 
+import { EMPLOYEES } from '../constants';
+
 export class StaffRepository extends JsonFileReader {
   constructor() {
-    super('../../data/employees.json');
+    super(EMPLOYEES);
   }
 
-  // protected async getAll() {
-  //   return JSON.parse(await fs.promises.readFile(this.filename, { encoding: 'utf-8' }));
-  // }
+  public getEmployeesByNum() {}
 }

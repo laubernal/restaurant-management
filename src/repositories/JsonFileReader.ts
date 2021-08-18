@@ -1,7 +1,10 @@
 import * as fs from 'fs';
+import * as path from 'path';
+
+import { DATA_DIR } from '../constants';
 
 export abstract class JsonFileReader {
-  protected data!: string;
+  protected data!: object;
 
   constructor(private filename: string) {
     this.readJson();
@@ -13,7 +16,10 @@ export abstract class JsonFileReader {
     }
 
     try {
-      this.data = fs.readFileSync(this.filename, { encoding: 'utf-8' });
+      this.data = JSON.parse(
+        fs.readFileSync(path.join(DATA_DIR, this.filename), { encoding: 'utf-8' })
+      );
+      console.log(this.data);
     } catch {
       throw new Error('Could not read the file');
     }
