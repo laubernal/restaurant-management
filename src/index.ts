@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const staffRepository = new StaffRepository();
 
+staffRepository.getEmployeesByNum(5);
+
 app.get('/cost/total', async (req: Request, res: Response): Promise<Response> => {
   const staff = new StaffCollection([]);
 
