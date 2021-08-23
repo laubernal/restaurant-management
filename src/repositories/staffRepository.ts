@@ -8,15 +8,16 @@ export class StaffRepository extends JsonFileReader {
     super(EMPLOYEES);
   }
 
-  public getEmployeesByNum(num: number): any[] {
+  public getEmployeesByNum(number: number): any[] {
     let acc = 0;
     const employees: any[] = [];
 
     this.data.forEach((employee: any) => {
-      if (acc < num) {
+      if (acc < number) {
         acc++;
         employees.push({
-          name: employee.first_name + employee.last_name,
+          id: employee.id,
+          name: `${employee.first_name} ${employee.last_name}`,
           occupation: employee.occupation,
           phone: employee.phone,
         });
@@ -25,7 +26,8 @@ export class StaffRepository extends JsonFileReader {
 
     console.log(employees);
     return employees;
-
-    // console.log(this.data[0]);
   }
 }
+
+//Convert phone number string into a number:
+// phone: parseFloat(employee.phone.replace(/[^0-9]/g, '')),
