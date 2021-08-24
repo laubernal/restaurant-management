@@ -26,8 +26,11 @@ export class StaffRepository extends JsonFileReader {
 
     console.log(employees);
     return employees;
+    //   return {
+    //     employees: employees;
+    // }
   }
 }
 
 //Convert phone number string into a number:
-// phone: parseFloat(employee.phone.replace(/[^0-9]/g, '')),
+// phone: parseFloat(employee.phone.replace(/[^0-9]/g, ''))

@@ -13,16 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 
 const staffRepository = new StaffRepository();
 
-staffRepository.getEmployeesByNum(5);
-
 app.get('/cost/total', async (req: Request, res: Response): Promise<Response> => {
   const staff = new StaffCollection([]);
 
   return res.send(new TotalCostResponse(staff).toJson());
 });
 
-app.get('/operations/staff/', async (req: Request, res: Response): Promise<Response> => {
-  return res.send(employeesTemplate);
+app.get('/operations/staff/:number', async (req: Request, res: Response): Promise<void> => {
+  console.log(req.params.number);
+
+  staffRepository.getEmployeesByNum(5);
+  // return res.send(employeesTemplate);
 });
 
 try {
