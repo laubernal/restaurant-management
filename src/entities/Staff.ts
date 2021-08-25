@@ -6,7 +6,7 @@ export class Staff {
   private phone?: string = '';
   private iban?: string = '';
 
-  constructor(protected _salary: number, protected _name: string, protected _occupation: string) {}
+  constructor(protected _name: string, protected _occupation: string, protected _salary: number) {}
 
   public get salary(): number {
     return this._salary;

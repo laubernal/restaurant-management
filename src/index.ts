@@ -19,8 +19,8 @@ app.get('/cost/total', async (req: Request, res: Response): Promise<Response> =>
   return res.send(new TotalCostResponse(staff).toJson());
 });
 
-app.get('/operations/staff/:number', async (req: Request, res: Response): Promise<void> => {
-  console.log(req.params.number);
+app.get('/operations/staff/:numEmployees', (req: Request, res: Response): void => {
+  console.log(req.params.numEmployees);
 
   staffRepository.getEmployeesByNum(5);
   // return res.send(employeesTemplate);
