@@ -20,9 +20,9 @@ app.get('/cost/total', async (req: Request, res: Response): Promise<Response> =>
 });
 
 app.get('/operations/staff/:numEmployees', (req: Request, res: Response): void => {
-  console.log(req.params.numEmployees);
+  const numEmployees = parseInt(req.params.numEmployees);
 
-  staffRepository.getEmployeesByNum(5);
+  staffRepository.getEmployeesByNum(numEmployees);
   // return res.send(employeesTemplate);
 });
 

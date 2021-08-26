@@ -7,8 +7,8 @@ import { EMPLOYEES } from '../constants';
 export interface IEmployee {
   // [index: string]: number | string;
   id?: number;
-  firstName: string;
-  lastName?: string;
+  name: string;
+  // lastName?: string;
   email?: string;
   gender?: string;
   occupation: string;
@@ -29,31 +29,34 @@ export class StaffRepository extends JsonFileReader {
     this.data.forEach((employee: any) => {
       if (acc < number) {
         acc++;
-        employees.push({
-          id: employee.id,
-          name: `${employee.first_name} ${employee.last_name}`,
-          occupation: employee.occupation,
-          phone: employee.phone,
-        });
+
+        employees.push(this.toData(employee));
+
+        // employees.push({
+        //   id: employee.id,
+        //   name: `${employee.first_name} ${employee.last_name}`,
+        //   occupation: employee.occupation,
+        //   phone: employee.phone,
+        // });
       }
     });
 
     console.log(employees);
     return employees;
-    //   return {
-    //     employees: employees;
-    // }
   }
 
   // MAPPER
   public toDomain(employee: IEmployee): Staff {
-    return new Staff(employee.firstName, employee.occupation, employee.salary);
+    return new Staff(employee.name, employee.occupation, employee.salary);
   }
 
   public toData(employee: Staff): IEmployee {
+    const fullName = `${employee.first_name} ${employee.last_name}`;
+
     return {
-      firstName: employee.name,
+      name: fullName,
       occupation: employee.occupation,
+      phone: employee.phone,
       salary: employee.salary,
     };
   }
