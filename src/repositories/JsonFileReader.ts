@@ -3,8 +3,8 @@ import * as path from 'path';
 
 import { DATA_DIR } from '../constants';
 
-export abstract class JsonFileReader {
-  protected data!: object[];
+export abstract class JsonFileReader<T> {
+  protected data!: T[];
 
   constructor(private filename: string) {
     this.readJson();

@@ -2,7 +2,11 @@ import { STAFF_TYPES } from '../constants';
 import { Staff } from './Staff';
 
 export class StaffCollection {
-  constructor(protected staffList: Staff[]) {}
+  constructor(protected _staffList: Staff[]) {}
+
+  public get staffList(): Staff[] {
+    return this._staffList;
+  }
 
   public totalStaff(): number {
     return this.staffList.length;

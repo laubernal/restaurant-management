@@ -16,7 +16,7 @@ export class Staff {
   }
 
   public get last_name(): string {
-    return this.last_name;
+    return this._lastName;
   }
 
   public get fullName(): string {
@@ -32,6 +32,10 @@ export class Staff {
   }
 
   public get phone(): string {
-    return this.phone;
+    return this._phone;
+  }
+
+  public get iban(): string {
+    return this._iban;
   }
 }

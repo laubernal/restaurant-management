@@ -1,3 +1,6 @@
+import { STAFF_TYPES } from '../constants';
+import { StaffCollection } from '../entities/StaffCollection';
+
 export class Metadata {
   constructor(private totalStaff: number, private staff: StaffMetadata[]) {}
 
@@ -13,6 +16,17 @@ export class Metadata {
         ...staff.toJson(),
       };
     }, {});
+  }
+
+  public static build(staffCollection: StaffCollection): Metadata {
+    const staffMetadata = STAFF_TYPES.map((staffType: string) => {
+      return new StaffMetadata(
+        staffCollection.totalOccupationStaff(staffType),
+        `${staffCollection.salary(staffType)} $/h`,
+        staffType
+      );
+    });
+    return new Metadata(staffCollection.totalStaff(), staffMetadata);
   }
 }
 

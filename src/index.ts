@@ -1,9 +1,11 @@
 import express, { Application, Request, Response } from 'express';
 
 import { TotalCostResponse } from './responses/TotalCost';
-import { employeesTemplate } from './responses/employees';
+import { OperationsStaffResponse } from './responses/OperationsStaffResponse';
 import { StaffRepository } from './repositories/staffRepository';
 import { StaffCollection } from './entities/StaffCollection';
+import { EmployeeResponse } from './responses/EmployeeReponse';
+import { Metadata, StaffMetadata } from './responses/Metadata';
 
 const app: Application = express();
 const port = 3000;
@@ -24,9 +26,15 @@ app.get(
   async (req: Request, res: Response): Promise<Response> => {
     const numEmployees = parseInt(req.params.numEmployees);
 
-    const employees = staffRepository.getEmployeesByNum(numEmployees);
+    const staffCollection = staffRepository.getEmployeesByNum(numEmployees);
 
-    return res.send(employees);
+    const employeeResponses = staffCollection.staffList.map(staff => {
+      return new EmployeeResponse(staff.fullName, staff.occupation, staff.phone, staff.iban);
+    });
+
+    return res.send(
+      new OperationsStaffResponse(employeeResponses, Metadata.build(staffCollection))
+    );
   }
 );
 

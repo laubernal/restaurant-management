@@ -1,20 +1,8 @@
-import { STAFF_TYPES } from '../constants';
 import { StaffCollection } from '../entities/StaffCollection';
-import { Metadata, StaffMetadata } from './Metadata';
+import { Metadata } from './Metadata';
 
 export class TotalCostResponse {
   constructor(private staff: StaffCollection) {}
-
-  private buildMetadata(): Metadata {
-    const staffMetadata = STAFF_TYPES.map((staffType: string) => {
-      return new StaffMetadata(
-        this.staff.totalOccupationStaff(staffType),
-        `${this.staff.salary(staffType)} $/h`,
-        staffType
-      );
-    });
-    return new Metadata(this.staff.totalStaff(), staffMetadata);
-  }
 
   private buildTotalCost() {
     return {
@@ -25,7 +13,7 @@ export class TotalCostResponse {
 
   public toJson() {
     return {
-      metadata: this.buildMetadata().toJson(),
+      metadata: Metadata.build(this.staff).toJson(),
       totalCost: this.buildTotalCost(),
     };
   }
