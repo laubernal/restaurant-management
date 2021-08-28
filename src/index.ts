@@ -19,12 +19,16 @@ app.get('/cost/total', async (req: Request, res: Response): Promise<Response> =>
   return res.send(new TotalCostResponse(staff).toJson());
 });
 
-app.get('/operations/staff/:numEmployees', (req: Request, res: Response): void => {
-  const numEmployees = parseInt(req.params.numEmployees);
+app.get(
+  '/operations/staff/:numEmployees',
+  async (req: Request, res: Response): Promise<Response> => {
+    const numEmployees = parseInt(req.params.numEmployees);
 
-  staffRepository.getEmployeesByNum(numEmployees);
-  // return res.send(employeesTemplate);
-});
+    const employees = staffRepository.getEmployeesByNum(numEmployees);
+
+    return res.send(employees);
+  }
+);
 
 try {
   app.listen(port, (): void => {

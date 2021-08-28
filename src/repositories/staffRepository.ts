@@ -46,15 +46,15 @@ export class StaffRepository extends JsonFileReader {
   }
 
   // MAPPER
-  public toDomain(employee: IEmployee): Staff {
-    return new Staff(employee.name, employee.occupation, employee.salary);
-  }
+  // public toDomain(employee: IEmployee): Staff {
+  //   return new Staff(employee.name, employee.occupation, employee.salary);
+  // }
 
   public toData(employee: Staff): IEmployee {
-    const fullName = `${employee.first_name} ${employee.last_name}`;
+    // const fullName = `${employee.first_name} ${employee.last_name}`;
 
     return {
-      name: fullName,
+      name: employee.fullName,
       occupation: employee.occupation,
       phone: employee.phone,
       salary: employee.salary,

@@ -1,23 +1,26 @@
 export class Staff {
-  private id?: number;
-  // private lastName?: string;
-  private email?: string;
-  private gender?: string;
-  // private phone?: string;
-  private iban?: string;
-
   constructor(
-    protected _first_name: string,
+    private _id: number,
+    protected _firstName: string,
+    private _lastName: string,
+    private _email: string,
+    private _gender: string,
+    private _phone: string,
+    private _iban: string,
     protected _occupation: string,
     protected _salary: number
   ) {}
 
-  public get first_name(): string {
-    return this._first_name;
+  public get firstName(): string {
+    return this._firstName;
   }
 
   public get last_name(): string {
     return this.last_name;
+  }
+
+  public get fullName(): string {
+    return `${this._firstName} ${this._lastName}`;
   }
 
   public get occupation(): string {
