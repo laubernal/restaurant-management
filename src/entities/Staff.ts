@@ -11,16 +11,28 @@ export class Staff {
     protected _salary: number
   ) {}
 
+  public get id(): number {
+    return this._id;
+  }
+
   public get firstName(): string {
     return this._firstName;
   }
 
-  public get last_name(): string {
+  public get lastName(): string {
     return this._lastName;
   }
 
   public get fullName(): string {
     return `${this._firstName} ${this._lastName}`;
+  }
+
+  public get email(): string {
+    return this._email;
+  }
+
+  public get gender(): string {
+    return this._gender;
   }
 
   public get occupation(): string {
