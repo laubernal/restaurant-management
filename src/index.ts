@@ -6,6 +6,7 @@ import { StaffRepository } from './repositories/staffRepository';
 import { StaffCollection } from './entities/StaffCollection';
 import { EmployeeResponse } from './responses/EmployeeReponse';
 import { Metadata, StaffMetadata } from './responses/Metadata';
+import { Staff } from './entities/Staff';
 
 const app: Application = express();
 const port = 3000;
@@ -37,6 +38,23 @@ app.get(
     );
   }
 );
+
+app.post('/operations/staff/new', (req: Request, res: Response): void => {
+  const employee = new Staff(
+    1001,
+    'Laura',
+    'Bernal',
+    'laurab@gmail.com',
+    'Female',
+    '146-627-8492',
+    'SI80 2811 7564 3986 237',
+    'manager',
+    20
+  );
+
+  // const employeeI = staffRepository.createEmployee(employee);
+  staffRepository.createEmployee(employee);
+});
 
 try {
   app.listen(port, (): void => {

@@ -26,6 +26,13 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
     console.log(employees);
     return new StaffCollection(employees);
   }
+
+  public createEmployee(employee: Staff): void {
+    const newEmployee = EmployeesMapper.toData(employee);
+    console.log(newEmployee);
+
+    // return newEmployee;
+  }
 }
 
 //Convert phone number string into a number:
