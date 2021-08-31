@@ -10998,5 +10998,16 @@
     "phone": "648-774-3317",
     "iban": "FR47 2232 9912 88QP DALR VVNP G70",
     "salary": 6
+  },
+  {
+    "id": 1001,
+    "first_name": "Laura",
+    "last_name": "Bernal",
+    "email": "laurab@gmail.com",
+    "gender": "Female",
+    "phone": "146-627-8492",
+    "iban": "SI80 2811 7564 3986 237",
+    "occupation": "manager",
+    "salary": 20
   }
 ]

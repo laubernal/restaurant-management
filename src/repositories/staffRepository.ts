@@ -31,7 +31,8 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
     const newEmployee = EmployeesMapper.toData(employee);
     console.log(newEmployee);
 
-    // return newEmployee;
+    this.data.push(newEmployee);
+    this.save();
   }
 }
 

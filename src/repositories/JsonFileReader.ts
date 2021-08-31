@@ -23,4 +23,8 @@ export abstract class JsonFileReader<T> {
       throw new Error('Could not read the file');
     }
   }
+
+  protected save(): void {
+    fs.writeFileSync(path.join(DATA_DIR, this.filename), JSON.stringify(this.data, null, 2));
+  }
 }
