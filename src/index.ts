@@ -44,7 +44,7 @@ app.post('/operations/staff/new', (req: Request, res: Response): void => {
     1001,
     'Laura',
     'Bernal',
-    'laurab@gmail.com',
+    'laurabernal@gmail.com',
     'Female',
     '146-627-8492',
     'SI80 2811 7564 3986 237',
@@ -52,8 +52,8 @@ app.post('/operations/staff/new', (req: Request, res: Response): void => {
     20
   );
 
-  // const employeeI = staffRepository.createEmployee(employee);
-  staffRepository.createEmployee(employee);
+  // staffRepository.createEmployee(employee);
+  staffRepository.update(1001, employee);
 });
 
 try {

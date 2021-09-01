@@ -34,6 +34,22 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
     this.data.push(newEmployee);
     this.save();
   }
+
+  public update(employeeId: number, newEmployee: Staff): void {
+    // Check if user exists
+    // If it doesn't exist, send message
+    // If it exists push the new in the array
+    const employeeToUpdate = this.data.find(({ id }) => id === employeeId);
+
+    if (!employeeToUpdate) {
+      throw new Error(`User with id: ${employeeId} does not exist`);
+    }
+
+    const updatedEmployee = EmployeesMapper.toData(newEmployee);
+
+    this.data.splice(this.data.indexOf(employeeToUpdate), 1, updatedEmployee);
+    this.save();
+  }
 }
 
 //Convert phone number string into a number:
