@@ -7,6 +7,7 @@ import { StaffCollection } from './entities/StaffCollection';
 import { EmployeeResponse } from './responses/EmployeeReponse';
 import { Metadata, StaffMetadata } from './responses/Metadata';
 import { Staff } from './entities/Staff';
+import { IEmployee } from './interfaces/IEmployee';
 
 const app: Application = express();
 const port = 3000;
@@ -38,6 +39,8 @@ app.get(
     );
   }
 );
+
+const staff = staffRepository.getOneBy('firstName', 'adri');
 
 app.post('/operations/staff/new', (req: Request, res: Response): void => {
   const employee = new Staff(

@@ -35,11 +35,41 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
     this.save();
   }
 
+  public getOneBy(propName: keyof Staff, value: string): Staff {
+    // const employee = this.data.find((employee: IEmployee) => {
+    //   const foundEmployee = EmployeesMapper.toDomain(employee);
+    //   return findFn(foundEmployee);
+    // });
+
+    const employee = this.data.find((employee: IEmployee) => {
+      const domainEmployee = EmployeesMapper.toDomain(employee);
+      domainEmployee[propName] === value;
+    });
+
+    if (!employee) {
+      throw new Error(`User not found`);
+    }
+
+    return EmployeesMapper.toDomain(employee);
+  }
+
+  public getOne(employeeId: number): Staff {
+    const employee = this.data.find(({ id }) => {
+      id === employeeId;
+    });
+
+    if (!employee) {
+      throw new Error(`User with id: ${employeeId} does not exist`);
+    }
+
+    return EmployeesMapper.toDomain(employee);
+  }
+
   public update(employeeId: number, newEmployee: Staff): void {
     // Check if user exists
     // If it doesn't exist, send message
     // If it exists push the new in the array
-    const employeeToUpdate = this.data.find(({ id }) => id === employeeId);
+    const employeeToUpdate = this.getOne(employeeId);
 
     if (!employeeToUpdate) {
       throw new Error(`User with id: ${employeeId} does not exist`);
@@ -47,7 +77,11 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
 
     const updatedEmployee = EmployeesMapper.toData(newEmployee);
 
-    this.data.splice(this.data.indexOf(employeeToUpdate), 1, updatedEmployee);
+    this.data.splice(
+      this.data.indexOf(EmployeesMapper.toData(employeeToUpdate)),
+      1,
+      updatedEmployee
+    );
     this.save();
   }
 }
