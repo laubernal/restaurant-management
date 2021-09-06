@@ -1,12 +1,15 @@
-import { JsonFileReader } from './JsonFileReader';
 import { Staff } from '../entities/Staff';
 import { StaffCollection } from '../entities/StaffCollection';
 import { IEmployee } from '../interfaces/IEmployee';
 import { EmployeesMapper } from '../mappers/EmployeesMapper';
 
 import { EMPLOYEES } from '../constants';
+import { FsRepository } from './FsRepository';
 
-export class StaffRepository extends JsonFileReader<IEmployee> {
+// export class StaffRepository extends JsonFileReader<IEmployee> {
+export class StaffRepository extends FsRepository<IEmployee, Staff> {
+  protected mapper = new EmployeesMapper();
+
   constructor() {
     super(EMPLOYEES);
   }
@@ -19,7 +22,7 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
       if (acc < number) {
         acc++;
 
-        employees.push(EmployeesMapper.toDomain(employee));
+        employees.push(this.mapper.toDomain(employee));
       }
     });
 
@@ -27,12 +30,8 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
     return new StaffCollection(employees);
   }
 
-  public createEmployee(employee: Staff): void {
-    const newEmployee = EmployeesMapper.toData(employee);
-    console.log(newEmployee);
-
-    this.data.push(newEmployee);
-    this.save();
+  public createStaff(staff: Staff) {
+    super.create(staff);
   }
 
   public getOneBy(propName: keyof Staff, value: string): Staff {
@@ -42,7 +41,7 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
     // });
 
     const employee = this.data.find((employee: IEmployee) => {
-      const domainEmployee = EmployeesMapper.toDomain(employee);
+      const domainEmployee = this.mapper.toDomain(employee);
       domainEmployee[propName] === value;
     });
 
@@ -50,7 +49,7 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
       throw new Error(`User not found`);
     }
 
-    return EmployeesMapper.toDomain(employee);
+    return this.mapper.toDomain(employee);
   }
 
   public getOne(employeeId: number): Staff {
@@ -62,7 +61,7 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
       throw new Error(`User with id: ${employeeId} does not exist`);
     }
 
-    return EmployeesMapper.toDomain(employee);
+    return this.mapper.toDomain(employee);
   }
 
   public update(employeeId: number, newEmployee: Staff): void {
@@ -75,13 +74,9 @@ export class StaffRepository extends JsonFileReader<IEmployee> {
       throw new Error(`User with id: ${employeeId} does not exist`);
     }
 
-    const updatedEmployee = EmployeesMapper.toData(newEmployee);
+    const updatedEmployee = this.mapper.toData(newEmployee);
 
-    this.data.splice(
-      this.data.indexOf(EmployeesMapper.toData(employeeToUpdate)),
-      1,
-      updatedEmployee
-    );
+    this.data.splice(this.data.indexOf(this.mapper.toData(employeeToUpdate)), 1, updatedEmployee);
     this.save();
   }
 }

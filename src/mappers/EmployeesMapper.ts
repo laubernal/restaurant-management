@@ -1,8 +1,9 @@
 import { IEmployee } from '../interfaces/IEmployee';
 import { Staff } from '../entities/Staff';
+import { IMapper } from './IMapper';
 
-export class EmployeesMapper {
-  public static toDomain(employee: IEmployee): Staff {
+export class EmployeesMapper implements IMapper<IEmployee, Staff> {
+  public toDomain(employee: IEmployee): Staff {
     return new Staff(
       employee.id,
       employee.first_name,
@@ -16,9 +17,7 @@ export class EmployeesMapper {
     );
   }
 
-  public static toData(employee: Staff): IEmployee {
-    // const fullName = `${employee.first_name} ${employee.last_name}`;
-
+  public toData(employee: Staff): IEmployee {
     return {
       id: employee.id,
       first_name: employee.firstName,
