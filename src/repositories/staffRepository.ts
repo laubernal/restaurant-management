@@ -43,7 +43,7 @@ export class StaffRepository extends FsRepository<IEmployee, Staff> {
   }
 
   public getOne(employeeId: number): Staff {
-    return super.getOne(employee);
+    return super.getOne(employeeId);
   }
 
   public update(employeeId: number, newEmployee: Staff): void {
