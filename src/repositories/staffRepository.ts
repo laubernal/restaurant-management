@@ -6,7 +6,6 @@ import { EmployeesMapper } from '../mappers/EmployeesMapper';
 import { EMPLOYEES } from '../constants';
 import { FsRepository } from './FsRepository';
 
-// export class StaffRepository extends JsonFileReader<IEmployee> {
 export class StaffRepository extends FsRepository<IEmployee, Staff> {
   protected mapper = new EmployeesMapper();
 
@@ -40,44 +39,15 @@ export class StaffRepository extends FsRepository<IEmployee, Staff> {
     //   return findFn(foundEmployee);
     // });
 
-    const employee = this.data.find((employee: IEmployee) => {
-      const domainEmployee = this.mapper.toDomain(employee);
-      domainEmployee[propName] === value;
-    });
-
-    if (!employee) {
-      throw new Error(`User not found`);
-    }
-
-    return this.mapper.toDomain(employee);
+    return super.getOneBy(propName, value);
   }
 
   public getOne(employeeId: number): Staff {
-    const employee = this.data.find(({ id }) => {
-      id === employeeId;
-    });
-
-    if (!employee) {
-      throw new Error(`User with id: ${employeeId} does not exist`);
-    }
-
-    return this.mapper.toDomain(employee);
+    return super.getOne(employee);
   }
 
   public update(employeeId: number, newEmployee: Staff): void {
-    // Check if user exists
-    // If it doesn't exist, send message
-    // If it exists push the new in the array
-    const employeeToUpdate = this.getOne(employeeId);
-
-    if (!employeeToUpdate) {
-      throw new Error(`User with id: ${employeeId} does not exist`);
-    }
-
-    const updatedEmployee = this.mapper.toData(newEmployee);
-
-    this.data.splice(this.data.indexOf(this.mapper.toData(employeeToUpdate)), 1, updatedEmployee);
-    this.save();
+    super.update(employeeId, newEmployee);
   }
 }
 
