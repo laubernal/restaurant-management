@@ -11009,5 +11009,16 @@
     "iban": "SI80 2811 7564 3986 237",
     "occupation": "manager",
     "salary": 20
+  },
+  {
+    "id": 1002,
+    "first_name": "Adri",
+    "last_name": "Claret",
+    "email": "adri@gmail.com",
+    "gender": "Male",
+    "phone": "123-456-7890",
+    "iban": "SI80 2811 7564 4561 123",
+    "occupation": "manager",
+    "salary": 20
   }
 ]

@@ -34,11 +34,6 @@ export class StaffRepository extends FsRepository<IEmployee, Staff> {
   }
 
   public getOneBy(propName: keyof Staff, value: string): Staff {
-    // const employee = this.data.find((employee: IEmployee) => {
-    //   const foundEmployee = EmployeesMapper.toDomain(employee);
-    //   return findFn(foundEmployee);
-    // });
-
     return super.getOneBy(propName, value);
   }
 
