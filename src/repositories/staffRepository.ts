@@ -2,9 +2,9 @@ import { Staff } from '../entities/Staff';
 import { StaffCollection } from '../entities/StaffCollection';
 import { IEmployee } from '../interfaces/IEmployee';
 import { EmployeesMapper } from '../mappers/EmployeesMapper';
+import { FsRepository } from './FsRepository';
 
 import { EMPLOYEES } from '../constants';
-import { FsRepository } from './FsRepository';
 
 export class StaffRepository extends FsRepository<IEmployee, Staff> {
   protected mapper = new EmployeesMapper();
