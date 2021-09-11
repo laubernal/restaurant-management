@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 
+import { operationsProviders } from './routes/operationsProviders';
 import { operationsStaff } from './routes/operationsStaff';
 import { totalCost } from './routes/totalCost';
 
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(operationsStaff);
 app.use(totalCost);
+app.use(operationsProviders);
 
 try {
   app.listen(port, (): void => {
