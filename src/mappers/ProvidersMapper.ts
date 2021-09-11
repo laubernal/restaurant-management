@@ -1,4 +1,5 @@
-import { Product, Providers } from '../entities/Providers';
+import { Product } from '../entities/Product';
+import { Providers } from '../entities/Providers';
 import { IProvider } from '../interfaces/IProvider';
 import { IMapper } from './IMapper';
 
@@ -23,12 +24,12 @@ export class ProvidersMapper implements IMapper<IProvider, Providers> {
 
   public toData(provider: Providers): IProvider {
     const products = provider.products.map(product => {
-        return {
-            name: product.name,
-            price: product.price,
-            qty: product.qty
-        }
-    })
+      return {
+        name: product.name,
+        price: product.price,
+        qty: product.qty,
+      };
+    });
 
     return {
       id: provider.id,
@@ -37,7 +38,7 @@ export class ProvidersMapper implements IMapper<IProvider, Providers> {
       email: provider.email,
       address: provider.address,
       purchase_date: provider.purchaseDate,
-      products
+      products,
     };
   }
 }

@@ -10,4 +10,8 @@ export class ProvidersRepository extends FsRepository<IProvider, Providers> {
   constructor() {
     super(PROVIDERS);
   }
+
+  public create(provider: Providers) {
+    super.create(provider);
+  }
 }
