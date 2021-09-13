@@ -22,4 +22,10 @@ router.post('/operations/providers/new', (req: Request, res: Response): void => 
   providersRepository.create(provider);
 });
 
+router.get('/operations/providers/date', (req: Request, res: Response): void => {
+  // return res.send(providersRepository.getByDate('2018-03-29'));
+  const provider = providersRepository.getByDate('2018-03-29T20:46:23');
+  console.log(provider);
+});
+
 export { router as operationsProviders };
