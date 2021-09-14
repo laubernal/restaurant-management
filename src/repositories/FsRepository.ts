@@ -5,7 +5,10 @@ import { JsonFileReader } from './JsonFileReader';
 type ObjectDefinition = { [key: string]: any };
 type HasId = { id: number };
 
-export abstract class FsRepository<T extends HasId, K extends ObjectDefinition> extends JsonFileReader<T> {
+export abstract class FsRepository<
+  T extends HasId,
+  K extends ObjectDefinition
+> extends JsonFileReader<T> {
   protected abstract mapper: IMapper<T, K>;
 
   public create(item: K): void {
@@ -35,11 +38,11 @@ export abstract class FsRepository<T extends HasId, K extends ObjectDefinition> 
 
     const item = this.data.find((item: T) => {
       const domainItem = this.mapper.toDomain(item);
-      domainItem[propName] === value;
+      return domainItem[propName] === value;
     });
 
     if (!item) {
-      throw new Error(`User not found`);
+      throw new Error(`Item not found`);
     }
 
     return this.mapper.toDomain(item);

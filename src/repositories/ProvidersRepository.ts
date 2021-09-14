@@ -15,13 +15,21 @@ export class ProvidersRepository extends FsRepository<IProvider, Providers> {
     super.create(provider);
   }
 
-  public getByDate(date: string): Providers {
-    const toEpoch = new Date(date).getTime();
-    console.log(date);
-    console.log(new Date(date));
-    console.log(toEpoch);
+  public getOneBy(propName: keyof Providers, value: string): Providers {
+    const provider = super.getOneBy(propName, value);
 
-    const provider = super.getOneBy('purchaseDate', toEpoch.toString());
+    if (!provider) {
+      throw new Error('Provider not found');
+    }
+
+    return provider;
+  }
+
+  public getByDate(date: string): Providers {
+    const toEpoch = new Date(date).getTime().toString();
+    const epochDate = toEpoch.slice(0, 10);
+
+    const provider = super.getOneBy('purchaseDate', epochDate);
 
     if (!provider) {
       throw new Error('Provider not found');
