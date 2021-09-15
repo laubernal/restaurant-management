@@ -37,4 +37,15 @@ export class ProvidersRepository extends FsRepository<IProvider, Providers> {
 
     return provider;
   }
+
+  public getAllBy(propName: keyof Providers, value: string): Providers[] {
+    const providers = this.data.filter((provider: IProvider) => {
+      const domainProvider = this.mapper.toDomain(provider);
+      return domainProvider[propName] === value;
+    });
+
+    return providers.map(provider => {
+      return this.mapper.toDomain(provider);
+    });
+  }
 }

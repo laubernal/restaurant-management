@@ -27,4 +27,15 @@ router.get('/operations/providers/date', async (req: Request, res: Response): Pr
   return res.send(provider);
 });
 
+router.get(
+  '/operations/providers/search/:item',
+  async (req: Request, res: Response): Promise<Response> => {
+    const item = req.params.item as keyof Providers;
+
+    const providers: Providers[] = providersRepository.getAllBy(item, 'Calle Demonitu 123');
+
+    return res.send(providers);
+  }
+);
+
 export { router as operationsProviders };
