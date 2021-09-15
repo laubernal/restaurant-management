@@ -22,12 +22,9 @@ router.post('/operations/providers/new', (req: Request, res: Response): void => 
   providersRepository.create(provider);
 });
 
-router.get('/operations/providers/date', (req: Request, res: Response): void => {
-  // return res.send(providersRepository.getByDate('2018-03-29'));
+router.get('/operations/providers/date', async (req: Request, res: Response): Promise<Response> => {
   const provider = providersRepository.getByDate('2018-03-29T20:46:23');
-  // const provider = providersRepository.getOneBy('purchaseDate', '2018-03-29T20:46:23');
-
-  console.log(provider);
+  return res.send(provider);
 });
 
 export { router as operationsProviders };

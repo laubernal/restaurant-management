@@ -34050,6 +34050,7 @@
     "iban": "LE17 6729 9047 2972 1294 1",
     "email": "lauraEnterprise@gmail.com",
     "address": "Calle Falsa 123",
+    "purchase_date": "1522349183",
     "products": [
       {
         "name": "Potato",
@@ -34069,6 +34070,7 @@
     "iban": "LE17 6729 9047 2972 1294 2",
     "email": "adriEnterprise@gmail.com",
     "address": "Calle Demonitu 123",
+    "purchase_date": "1522349183",
     "products": [
       {
         "name": "Pizza",
