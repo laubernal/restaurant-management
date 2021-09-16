@@ -32,7 +32,7 @@ router.get(
   async (req: Request, res: Response): Promise<Response> => {
     const item = req.params.item as keyof Providers;
 
-    const providers: Providers[] = providersRepository.getAllBy(item, 'Calle Demonitu 123');
+    const providers: Providers[] = providersRepository.getAllBy(item, 901);
 
     return res.send(providers);
   }

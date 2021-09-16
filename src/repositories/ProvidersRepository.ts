@@ -15,7 +15,7 @@ export class ProvidersRepository extends FsRepository<IProvider, Providers> {
     super.create(provider);
   }
 
-  public getOneBy(propName: keyof Providers, value: string): Providers {
+  public getOneBy(propName: keyof Providers, value: string | number): Providers {
     const provider = super.getOneBy(propName, value);
 
     if (!provider) {
@@ -38,14 +38,13 @@ export class ProvidersRepository extends FsRepository<IProvider, Providers> {
     return provider;
   }
 
-  public getAllBy(propName: keyof Providers, value: string): Providers[] {
-    const providers = this.data.filter((provider: IProvider) => {
-      const domainProvider = this.mapper.toDomain(provider);
-      return domainProvider[propName] === value;
-    });
+  public getAllBy(propName: keyof Providers, value: string | number): Providers[] {
+    const provider = super.getAllBy(propName, value);
 
-    return providers.map(provider => {
-      return this.mapper.toDomain(provider);
-    });
+    if (!provider) {
+      throw new Error('Provider not found');
+    }
+
+    return provider;
   }
 }

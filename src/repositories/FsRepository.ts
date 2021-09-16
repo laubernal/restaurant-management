@@ -2,6 +2,7 @@ import { IMapper } from '../mappers/IMapper';
 import { JsonFileReader } from './JsonFileReader';
 
 // T = IEmployee ----- K = Staff
+// T = IProviders ---- K = Providers
 type ObjectDefinition = { [key: string]: any };
 type HasId = { id: number };
 
@@ -30,12 +31,12 @@ export abstract class FsRepository<
     return this.mapper.toDomain(item);
   }
 
-  public getOneBy(propName: keyof K, value: string): K {
+  public getOneBy(propName: keyof K, value: string | number): K {
     // const employee = this.data.find((employee: IEmployee) => {
     //   const foundEmployee = EmployeesMapper.toDomain(employee);
     //   return findFn(foundEmployee);
     // });
-    
+
     const item = this.data.find((item: T) => {
       const domainItem = this.mapper.toDomain(item);
       return domainItem[propName] === value;
@@ -59,5 +60,20 @@ export abstract class FsRepository<
 
     this.data.splice(this.data.indexOf(this.mapper.toData(itemToUpdate)), 1, updatedEmployee);
     this.save();
+  }
+
+  public getAllBy(propName: keyof K, value: string | number): K[] {
+    const items = this.data.filter((item: T) => {
+      const domainItem = this.mapper.toDomain(item);
+      return domainItem[propName] === value;
+    });
+
+    if (!items) {
+      throw new Error('Item not found');
+    }
+
+    return items.map(item => {
+      return this.mapper.toDomain(item);
+    });
   }
 }
